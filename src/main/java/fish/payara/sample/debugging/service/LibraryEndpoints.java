@@ -48,4 +48,11 @@ public class LibraryEndpoints implements LibraryService {
         return book;
     }
 
+    @Override
+    public Library deleteLibrary(String name) {
+        Library library = getLibrary(name);
+        library.getBooks().remove(library);
+        return library;
+    }
+
 }
