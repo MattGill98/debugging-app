@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.Path;
 
 import fish.payara.sample.debugging.api.BookService;
@@ -22,27 +23,30 @@ public class BookEndpoints implements BookService {
 
     @Override
     public Collection<Book> getAllBooks() {
-        return null;
+        return model.getBooks();
     }
 
     @Override
     public Book getBook(String id) {
-        return null;
+        return model.getBooks().stream()
+                .filter(book -> book.getId().equals(id))
+                .findAny()
+                .orElseThrow(() -> new NotFoundException("Unable to find the book with the specified id."));
     }
 
     @Override
     public Book addBook(Book id) {
-        return null;
+        return model.addBook(id);
     }
 
     @Override
     public Book updateBook(Book book) {
-        return null;
+        return model.updateBook(book);
     }
 
     @Override
     public Book deleteBook(String id) {
-        return null;
+        return model.deleteBook(id);
     }
 
 }

@@ -15,12 +15,17 @@ import org.glassfish.jersey.test.JerseyTest;
 import org.glassfish.jersey.test.TestProperties;
 
 import fish.payara.sample.debugging.model.ServiceModel;
+import fish.payara.sample.debugging.service.exception.BeanValidationExceptionMapper;
+import fish.payara.sample.debugging.service.exception.IllegalArgumentExceptionMapper;
+import fish.payara.sample.debugging.service.exception.WebApplicationExceptionMapper;
 
 public abstract class ClientTest extends JerseyTest {
 
     protected Class<?>[] getClasses() {
         final Class<?>[] classes = {
-            // Add Jersey providers here to enable them in tests
+            BeanValidationExceptionMapper.class,
+            WebApplicationExceptionMapper.class,
+            IllegalArgumentExceptionMapper.class,
             BookEndpoints.class,
             LibraryEndpoints.class,
         };
